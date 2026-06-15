@@ -1,0 +1,22 @@
+{
+  "name": "Perspect",
+  "description": "Political manipulation detector",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": "./icons/perspect.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./content/content.js"],
+      "css": ["./content/content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "./background/background.js"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>"]
+}
