@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perspect</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+
+  <header class="panel-header">
+    <div class="header-brand">
+      <img src="../icons/logo_mark.png" class="logo-mark" alt="Perspect icon" />
+      <span class="logo-text">perspect</span>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="analysis">Analysis</button>
+    <button class="tab" data-tab="chat">Chat</button>
+    <button class="tab" data-tab="settings">Settings</button>
+  </div>
+
+  <main class="panel-content">
+
+    <section id="tab-analysis" class="tab-panel">
+      <div class="detected-count">
+        <div class="count-label">Detected Issues</div>
+        <div class="count-number" id="issue-count">0</div>
+      </div>
+      <div class="techniques" id="techniques-list"></div>
+      <div id="neutral-box" class="neutral-box hidden">
+        <div class="neutral-label">&#10022; Neutral Version</div>
+        <p class="neutral-text" id="neutral-text"></p>
+      </div>
+      <button id="generate-btn" class="btn-primary">&#10022; Generate Neutral Version</button>
+    </section>
+
+    <section id="tab-chat" class="tab-panel chat-panel hidden">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-empty" id="chat-empty">
+          <div class="chat-empty-icon">&#128172;</div>
+          <p>Ask me anything about the detected techniques</p>
+          <div class="chat-hints">
+            <div>Try: "Explain bandwagon appeal"</div>
+            <div>or "Rephrase this text"</div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask a question..." autocomplete="off" />
+        <button id="chat-send">Send</button>
+      </div>
+    </section>
+
+    <section id="tab-settings" class="tab-panel hidden">
+
+      <div class="settings-section">
+        <label class="toggle-row">
+          <div>
+            <div class="settings-label">Auto-generate neutral version</div>
+            <div class="settings-desc">Immediately show neutral text when manipulation is detected</div>
+          </div>
+          <input type="checkbox" id="auto-neutral" />
+        </label>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">Detection Sensitivity</div>
+        <select class="settings-select" id="sensitivity">
+          <option>Low — Only obvious manipulation</option>
+          <option selected>Medium — Balanced detection</option>
+          <option>High — Flag potential issues</option>
+        </select>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">Highlight Color</div>
+        <div class="color-swatches">
+          <div class="color-swatch active" style="background:#c8e8ed;" data-color="#c8e8ed"></div>
+          <div class="color-swatch" style="background:#e9d5ff;" data-color="#e9d5ff"></div>
+          <div class="color-swatch" style="background:#fde68a;" data-color="#fde68a"></div>
+          <div class="color-swatch" style="background:#fecaca;" data-color="#fecaca"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">About</div>
+        <p class="about-text">Perspect helps you identify persuasive techniques in online content. Version 1.0.0</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>
