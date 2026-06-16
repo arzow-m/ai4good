@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
 # Path to your checkpoint
-CHECKPOINT_PATH = "./backend/model/checkpoint-1876"
+CHECKPOINT_PATH = "./model/checkpoint-1876"
 
 print("Loading local tokenizer and model checkpoint...")
 
@@ -21,7 +21,7 @@ except Exception as e:
 model.eval()
 
 # Test input
-text = "This is a test sentence"
+text = "Our enemies are destroying everything we built. Join us now or lose it all forever. Every true patriot knows what must be done."
 
 print(f"\nInput text: {text}")
 
