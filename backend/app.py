@@ -17,11 +17,11 @@ app.add_middleware(
 
 
 
-CHECKPOINT_PATH = "./model/checkpoint-1876"
+CHECKPOINT_PATH = "./model/checkpoints/checkpoint-1876"
 
 print("Loading model...")
 
-tokenizer = AutoTokenizer.from_pretrained(CHECKPOINT_PATH)
+tokenizer = AutoTokenizer.from_pretrained("roberta-base")
 model = AutoModelForSequenceClassification.from_pretrained(CHECKPOINT_PATH)
 
 model.eval()
@@ -49,6 +49,10 @@ def predict(data: InputData):
         truncation=True,
         padding=True
     )
+
+    print("Input text:", data.text)
+    print("Input IDs:", inputs['input_ids'])
+    print("Attention mask:", inputs['attention_mask'])
 
     with torch.no_grad():
         outputs = model(**inputs)

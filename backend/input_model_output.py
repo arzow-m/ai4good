@@ -7,7 +7,7 @@ CHECKPOINT_PATH = "./model/checkpoints/checkpoint-1876"
 print("Loading local tokenizer and model checkpoint...")
 
 try:
-    tokenizer = AutoTokenizer.from_pretrained(CHECKPOINT_PATH)
+    tokenizer = AutoTokenizer.from_pretrained("roberta-base")
     model = AutoModelForSequenceClassification.from_pretrained(CHECKPOINT_PATH)
 
     print("Model loaded successfully!")
