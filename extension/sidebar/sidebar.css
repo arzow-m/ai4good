@@ -120,6 +120,27 @@ body {
   line-height: 1;
 }
 
+/* post snippet */
+
+.post-snippet {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #d0e6ea;
+}
+
+.post-snippet p {
+  font-size: 13px;
+  color: #0f2f35;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.post-snippet.hidden {
+  display: none;
+}
+
 .techniques {
   display: flex;
   flex-direction: column;

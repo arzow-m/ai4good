@@ -1,0 +1,18 @@
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+# Verify this path matches your folder structure exactly
+checkpoint_path = "./ai4good/backend/model/checkpoint-1876"
+base_tokenizer_name = "roberta-base"
+
+print("Loading tokenizer from Hugging Face...")
+tokenizer = AutoTokenizer.from_pretrained(base_tokenizer_name)
+
+print("Loading local model checkpoint...")
+# Note: If you aren't doing sequence classification, change this class 
+# (e.g., AutoModelForCausalLM, AutoModelForMaskedLM, etc.)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint_path)
+
+print("Saving tokenizer locally for future use...")
+tokenizer.save_pretrained(checkpoint_path)
+
+print("Success! Model and tokenizer are loaded and ready.")

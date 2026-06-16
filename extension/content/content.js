@@ -5,6 +5,8 @@ const SELECTORS = {
   'instagram.com': 'span._ap3a._aaco._aacu._aacx._aad7._aade'
 }
 
+const API_URL = 'http://localhost:8000'
+
 function getSelector() {
   const domain = Object.keys(SELECTORS).find(d =>
     window.location.hostname.includes(d)
@@ -14,12 +16,29 @@ function getSelector() {
 
 const seen = new Set()
 
-function handleText(el) {
+async function handleText(el) {
   const text = el.innerText.trim()
   if (!text) return
   if (seen.has(text)) return
   seen.add(text)
   console.log("Perspect found:", text)
+
+  try {
+    const res = await fetch(`${API_URL}/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    })
+    const data = await res.json()
+    console.log('Perspect result:', data)
+    chrome.runtime.sendMessage({ 
+      action: 'analysisResult', 
+      label: data.prediction,
+      text: text
+    })
+  } catch (err) {
+    console.error('Perspect error:', err)
+  }
 }
 
 const viewportObserver = new IntersectionObserver((entries) => {
