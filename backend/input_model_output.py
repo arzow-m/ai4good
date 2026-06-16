@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
 # Path to your checkpoint
-CHECKPOINT_PATH = "./model/checkpoint-1876"
+CHECKPOINT_PATH = "./model/checkpoints/checkpoint-1876"
 
 print("Loading local tokenizer and model checkpoint...")
 
