@@ -14,14 +14,24 @@ function getSelector() {
   return domain ? SELECTORS[domain] : 'article p, [role="article"] p, main p'
 }
 
-const seen = new Set()
+const cache = new Map()
 
 async function handleText(el) {
   const text = el.innerText.trim()
   if (!text) return
-  if (seen.has(text)) return
-  seen.add(text)
-  console.log("Perspect found:", text)
+
+  if (cache.has(text)) {
+    const cached = cache.get(text)
+    try {
+      chrome.runtime.sendMessage({
+        action: 'analysisResult',
+        text: cached.text,
+        predictions: cached.predictions,
+        hostname: cached.hostname
+      })
+    } catch (err) {}
+    return
+  }
 
   try {
     const res = await fetch(`${API_URL}/predict`, {
@@ -30,12 +40,20 @@ async function handleText(el) {
       body: JSON.stringify({ text })
     })
     const data = await res.json()
-    console.log('Perspect result:', data)
-    chrome.runtime.sendMessage({ 
-      action: 'analysisResult', 
-      label: data.prediction,
-      text: text
-    })
+    const result = {
+      text: text,
+      predictions: data.prediction,
+      hostname: window.location.hostname
+    }
+    cache.set(text, result)
+    try {
+      chrome.runtime.sendMessage({
+        action: 'analysisResult',
+        text: result.text,
+        predictions: result.predictions,
+        hostname: result.hostname
+      })
+    } catch (err) {}
   } catch (err) {
     console.error('Perspect error:', err)
   }
@@ -46,6 +64,8 @@ const viewportObserver = new IntersectionObserver((entries) => {
     if (!entry.isIntersecting) return
     handleText(entry.target)
   })
+}, {
+  rootMargin: '0px 0px -50% 0px'
 })
 
 const mutationObserver = new MutationObserver((mutations) => {

@@ -24,20 +24,14 @@
   <main class="panel-content">
 
     <section id="tab-analysis" class="tab-panel">
-      <div class="detected-count">
-        <div class="count-label">Detected Issues</div>
-        <div class="count-number" id="issue-count">0</div>
-      </div>
-      <div id="post-snippet" class="post-snippet hidden">
-        <div class="count-label">Analyzed Post</div>
-        <p id="snippet-text"></p>
+      <div class="sticky-header">
+        <div class="detected-count">
+          <div class="count-label">Detected Issues</div>
+          <div class="count-number" id="issue-count">-</div>
+        </div>
+        <div id="post-snippet" class="post-snippet hidden"></div>
       </div>
       <div class="techniques" id="techniques-list"></div>
-      <div id="neutral-box" class="neutral-box hidden">
-        <div class="neutral-label">&#10022; Neutral Version</div>
-        <p class="neutral-text" id="neutral-text"></p>
-      </div>
-      <button id="generate-btn" class="btn-primary">&#10022; Generate Neutral Version</button>
     </section>
 
     <section id="tab-chat" class="tab-panel chat-panel hidden">
@@ -58,7 +52,6 @@
     </section>
 
     <section id="tab-settings" class="tab-panel hidden">
-
       <div class="settings-section">
         <label class="toggle-row">
           <div>
@@ -92,7 +85,6 @@
         <div class="settings-label">About</div>
         <p class="about-text">Perspect helps you identify persuasive techniques in online content. Version 1.0.0</p>
       </div>
-
     </section>
 
   </main>

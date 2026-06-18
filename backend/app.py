@@ -50,19 +50,12 @@ def predict(data: InputData):
         padding=True
     )
 
-    print("Input text:", data.text)
-    print("Input IDs:", inputs['input_ids'])
-    print("Attention mask:", inputs['attention_mask'])
-
     with torch.no_grad():
         outputs = model(**inputs)
 
-    probs = torch.softmax(outputs.logits, dim=1)
-
-    prediction = torch.argmax(probs, dim=1).item()
+    probs = torch.sigmoid(outputs.logits)
 
     return {
         "input": data.text,
-        "prediction": LABEL_MAP.get(prediction, "Unknown"),
-        "probabilities": probs.tolist()[0]
+        "prediction": {LABEL_MAP[i]: round(prob, 4) for i, prob in enumerate(probs.tolist()[0])}
     }
