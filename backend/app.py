@@ -94,7 +94,7 @@ def chat(data: ChatMessage):
             {"role": "user", "content": data.message}
         ],
         temperature=0.3,
-        max_tokens=200
+        max_tokens=500
     )
 
     return {"response": response.choices[0].message.content}
