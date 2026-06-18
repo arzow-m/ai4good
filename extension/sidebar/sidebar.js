@@ -26,7 +26,12 @@ const LABEL_INFO = {
 }
 
 const THRESHOLD = 0.5
+const API_URL = 'http://localhost:8000'
+
 let currentHostname = null
+let currentPredictions = null
+let currentPostText = null
+let chatHistory = []
 
 // Tabs
 document.querySelectorAll('.tab').forEach((tab) => {
@@ -98,7 +103,24 @@ function renderTechniques(predictions, text, hostname) {
 // Listen for messages from content.js
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'analysisResult') {
+    currentPredictions = message.predictions
+    currentPostText = message.text
+    currentHostname = message.hostname
     renderTechniques(message.predictions, message.text, message.hostname)
+
+    const scoresStr = Object.entries(message.predictions)
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, prob]) => `${label}: ${(prob * 100).toFixed(1)}%`)
+      .join(', ')
+
+    chatHistory.push({
+      role: 'user',
+      content: `[New post from ${message.hostname}]: "${message.text.slice(0, 150)}" — Model scores: ${scoresStr}`
+    })
+    chatHistory.push({
+      role: 'assistant',
+      content: `Got it. I've noted the new post and its detection scores. What would you like to know?`
+    })
   }
 })
 
@@ -116,12 +138,33 @@ function addMessage(role, content) {
   chatMessages.scrollTop = chatMessages.scrollHeight
 }
 
-function sendMessage() {
+async function sendMessage() {
   const text = chatInput.value.trim()
   if (!text) return
   addMessage('user', text)
   chatInput.value = ''
-  setTimeout(() => addMessage('assistant', 'Chat with the API coming soon.'), 250)
+
+  chatHistory.push({ role: 'user', content: text })
+
+  try {
+    const res = await fetch(`${API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        post_text: currentPostText || '',
+        predictions: currentPredictions || {},
+        hostname: currentHostname || '',
+        history: chatHistory.slice(0, -1)
+      })
+    })
+    const data = await res.json()
+    addMessage('assistant', data.response)
+    chatHistory.push({ role: 'assistant', content: data.response })
+  } catch (err) {
+    addMessage('assistant', 'Something went wrong. Please try again.')
+    console.error('Perspect chat error:', err)
+  }
 }
 
 document.getElementById('chat-send').addEventListener('click', sendMessage)
