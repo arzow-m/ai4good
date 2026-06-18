@@ -18,7 +18,7 @@
   <div class="tabs">
     <button class="tab active" data-tab="analysis">Analysis</button>
     <button class="tab" data-tab="chat">Chat</button>
-    <button class="tab" data-tab="settings">Settings</button>
+    <button class="tab" data-tab="help">Help</button>
   </div>
 
   <main class="panel-content">
@@ -51,40 +51,90 @@
       </div>
     </section>
 
-    <section id="tab-settings" class="tab-panel hidden">
-      <div class="settings-section">
-        <label class="toggle-row">
-          <div>
-            <div class="settings-label">Auto-generate neutral version</div>
-            <div class="settings-desc">Immediately show neutral text when manipulation is detected</div>
-          </div>
-          <input type="checkbox" id="auto-neutral" />
-        </label>
-      </div>
+    <section id="tab-help" class="tab-panel hidden">
 
-      <div class="settings-section">
-        <div class="settings-label">Detection Sensitivity</div>
-        <select class="settings-select" id="sensitivity">
-          <option>Low — Only obvious manipulation</option>
-          <option selected>Medium — Balanced detection</option>
-          <option>High — Flag potential issues</option>
-        </select>
-      </div>
-
-      <div class="settings-section">
-        <div class="settings-label">Highlight Color</div>
-        <div class="color-swatches">
-          <div class="color-swatch active" style="background:#c8e8ed;" data-color="#c8e8ed"></div>
-          <div class="color-swatch" style="background:#e9d5ff;" data-color="#e9d5ff"></div>
-          <div class="color-swatch" style="background:#fde68a;" data-color="#fde68a"></div>
-          <div class="color-swatch" style="background:#fecaca;" data-color="#fecaca"></div>
+      <!-- About -->
+      <div class="help-card">
+        <div class="help-card-title">
+          <img src="../icons/info.svg" class="help-icon" alt="" />
+          About Perspect
+        </div>
+        <p class="about-text">Perspect uses AI to detect persuasive and manipulative language techniques in real time as you browse. It highlights flagged phrases, explains the technique being used, and helps you read more critically.</p>
+        <div class="help-card-footer">
+          <span class="about-text">Version 1.0.0</span>
+          <span class="help-card-link">perspect.ai</span>
         </div>
       </div>
 
-      <div class="settings-section">
-        <div class="settings-label">About</div>
-        <p class="about-text">Perspect helps you identify persuasive techniques in online content. Version 1.0.0</p>
+      <!-- Data & Privacy -->
+      <div class="help-card">
+        <div class="help-card-title">
+          <img src="../icons/globe-lock.svg" class="help-icon" alt="" />          
+          Data & Privacy
+        </div>
+        <p class="about-text">Text from posts you scroll past is sent to our analysis server to detect persuasion techniques. Post text is not stored or logged. Chat messages are processed by a third-party LLM (Groq) and are subject to their privacy policy. We do not collect personal data or browsing history.</p>
       </div>
+
+      <!-- Contact -->
+      <div class="help-card">
+        <div class="help-card-title">
+          <img src="../icons/mail.svg" class="help-icon" alt="" />
+          Contact Us
+        </div>
+        <p class="about-text">Have feedback, a question, or found a bug? We'd love to hear from you.</p>
+        <a href="mailto:hello@perspect.ai" class="help-link">hello@perspect.ai</a>
+      </div>
+
+      <!-- Contest a Label -->
+      <div class="help-card contest-card">
+        <button class="contest-toggle" id="contest-toggle">
+          <div class="help-card-title" style="margin-bottom:0;">
+            <img src="../icons/flag.svg" class="help-icon" alt="" />
+            Contest a Label
+          </div>
+          <span class="contest-chevron" id="contest-chevron">
+            <img src="../icons/chevron-down.svg" class="help-icon" alt="" />
+          </span>
+        </button>
+
+        <div id="contest-form" class="hidden">
+          <p class="about-text" style="margin-bottom:12px;">Think a phrase was incorrectly flagged? Report it and we'll review it to improve our model.</p>
+
+          <div id="report-success" class="report-success hidden">
+            <div class="report-success-icon">&#10003;</div>
+            <div class="report-success-title">Report submitted</div>
+            <p class="about-text">We'll review this flag and use it to improve detection accuracy.</p>
+            <button class="report-again-btn" id="report-again">Submit another</button>
+          </div>
+
+          <div id="report-form-fields">
+            <div class="form-group">
+              <label class="form-label">Post text</label>
+              <textarea id="report-text" class="form-textarea" rows="3" placeholder="Paste the text you believe was incorrectly flagged..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Labels to contest</label>
+              <div class="label-chips" id="label-chips">
+                <button class="label-chip" data-label="Call">Call</button>
+                <button class="label-chip" data-label="Justification">Justification</button>
+                <button class="label-chip" data-label="Manipulative Wording">Manipulative Wording</button>
+                <button class="label-chip" data-label="Attack on Reputation">Attack on Reputation</button>
+                <button class="label-chip" data-label="Simplification">Simplification</button>
+                <button class="label-chip" data-label="None">None</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Reasoning</label>
+              <textarea id="report-reason" class="form-textarea" rows="3" placeholder="Explain why these labels don't apply..."></textarea>
+            </div>
+
+            <button class="submit-report-btn" id="submit-report" disabled>Submit Report</button>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main>

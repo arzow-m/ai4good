@@ -181,3 +181,62 @@ document.querySelectorAll('.color-swatch').forEach((swatch) => {
 })
 
 renderTechniques(null, null, null)
+
+// Help tab
+const contestToggle = document.getElementById('contest-toggle')
+const contestForm = document.getElementById('contest-form')
+const contestChevron = document.getElementById('contest-chevron')
+const submitReport = document.getElementById('submit-report')
+const reportAgain = document.getElementById('report-again')
+const reportText = document.getElementById('report-text')
+const reportReason = document.getElementById('report-reason')
+let selectedLabels = []
+
+contestToggle.addEventListener('click', () => {
+  const isHidden = contestForm.classList.toggle('hidden')
+  contestChevron.innerHTML = isHidden 
+  ? '<img src="../icons/chevron-down.svg" class="help-icon" alt="" />'
+  : '<img src="../icons/chevron-up.svg" class="help-icon" alt="" />'
+})
+
+document.querySelectorAll('.label-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('selected')
+    const label = chip.dataset.label
+    if (selectedLabels.includes(label)) {
+      selectedLabels = selectedLabels.filter(l => l !== label)
+    } else {
+      selectedLabels.push(label)
+    }
+    validateForm()
+  })
+})
+
+function validateForm() {
+  const valid = reportText.value.trim() && selectedLabels.length > 0 && reportReason.value.trim()
+  submitReport.disabled = !valid
+}
+
+reportText.addEventListener('input', validateForm)
+reportReason.addEventListener('input', validateForm)
+
+submitReport.addEventListener('click', () => {
+  //stub for now
+  console.log('Report submitted:', {
+    text: reportText.value,
+    labels: selectedLabels,
+    reason: reportReason.value
+  })
+  document.getElementById('report-form-fields').classList.add('hidden')
+  document.getElementById('report-success').classList.remove('hidden')
+})
+
+reportAgain.addEventListener('click', () => {
+  reportText.value = ''
+  reportReason.value = ''
+  selectedLabels = []
+  document.querySelectorAll('.label-chip').forEach(c => c.classList.remove('selected'))
+  submitReport.disabled = true
+  document.getElementById('report-form-fields').classList.remove('hidden')
+  document.getElementById('report-success').classList.add('hidden')
+})
