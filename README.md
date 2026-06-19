@@ -8,7 +8,7 @@ A machine learning-powered Chrome extension that detects persuasion techniques i
 
 When you visit a news article, the extension highlights paragraphs and identifies which of 6 generalized persuasion techniques are present — Justification, Simplification, Call, Manipulative Wording, Attack on Reputation or None. A built-in chat assistant lets you ask follow-up questions about the detected techniques, or provides a neutral rewrite.
 
-Supports English language articles.
+Supports English language articles...
 
 ## Project Structure
 
