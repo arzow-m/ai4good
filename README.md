@@ -40,6 +40,15 @@ The extension scrapes article text from the active tab and sends it to a locally
 
 ## Setup
 
+### Environment Variables
+
+Create a .env file in the backend folder:
+
+```bash
+GROQ_API_KEY= your_api_key_here
+```
+Get a free API key from [Groq](https://console.groq.com/keys).
+
 ### Backend
 
 ```bash
