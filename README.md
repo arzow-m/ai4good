@@ -49,6 +49,11 @@ GROQ_API_KEY= your_api_key_here
 ```
 Get a free API key from [Groq](https://console.groq.com/keys).
 
+### Model
+
+Create a 'checkpoints' folder in backend/model.
+Add the correct checkpoint folder to backend/model/checkpoints. 
+
 ### Backend
 
 ```bash
