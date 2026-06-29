@@ -3,15 +3,9 @@
 A machine learning-powered Chrome extension that detects persuasion techniques in news articles at the paragraph level, powered by a fine-tuned transformer model trained on the SemEval 2023 Task 3 dataset.
 
 ## Resources
-
-- [Model Card](https://docs.google.com/document/d/1efaf6AZV5XFC1-bGp2zusex3nZVSX2FLha-u2ksDkew/edit?tab=t.0)
 - [Demo Day Slides](https://docs.google.com/presentation/d/1yCy7zeGHEvlM25I5dv6GIicrbNbuRrBp/edit?usp=drivesdk&ouid=114298068544227992623&rtpof=true&sd=true)
 - [Demo Day Pitch](https://www.youtube.com/live/AQ9wZb7XeQU?t=4180&si=lrpzv2dkRdCjDX8j)
-
-## What It Does
-
-What It Does
-
+- [Model Card](https://docs.google.com/document/d/1efaf6AZV5XFC1-bGp2zusex3nZVSX2FLha-u2ksDkew/edit?tab=t.0)
 
 ## What It Does
 
