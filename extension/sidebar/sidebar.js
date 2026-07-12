@@ -133,7 +133,11 @@ function addMessage(role, content) {
   chatEmpty.style.display = 'none'
   const div = document.createElement('div')
   div.className = `chat-message ${role}`
-  div.textContent = content
+  if (role === 'assistant') {
+    div.innerHTML = content
+  } else {
+    div.textContent = content
+  }
   chatMessages.appendChild(div)
   chatMessages.scrollTop = chatMessages.scrollHeight
 }
